@@ -48,7 +48,7 @@ def get_cart(request):
     return render_to_response('cart.html', dict(cart=Cart(request)))
 ```
 
-```html
+```python
 # templates/cart.html
 	{% extends 'base.html' %}
 
