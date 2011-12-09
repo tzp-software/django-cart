@@ -3,9 +3,6 @@ import models
 
 CART_ID = 'CART-ID'
 
-class ItemAlreadyExists(Exception):
-    pass
-
 class ItemDoesNotExist(Exception):
     pass
 
@@ -45,7 +42,12 @@ class Cart:
             item.quantity = quantity
             item.save()
         else:
-            raise ItemAlreadyExists
+            item = models.Item.objects.get(
+                cart=self.cart,
+                product=product,
+            )
+            item.quantity += 1
+            item.save()
 
     def remove(self, product):
         try:
