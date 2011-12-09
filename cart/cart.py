@@ -1,10 +1,15 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 import datetime
 import models
 
 CART_ID = 'CART-ID'
 
+
 class ItemDoesNotExist(Exception):
     pass
+
 
 class Cart:
     def __init__(self, request):
@@ -49,12 +54,9 @@ class Cart:
             item.quantity += 1
             item.save()
 
-    def remove(self, product):
+    def remove(self, item):
         try:
-            item = models.Item.objects.get(
-                cart=self.cart,
-                product=product,
-            )
+            item = models.Item.objects.get(pk=item.pk)
         except models.Item.DoesNotExist:
             raise ItemDoesNotExist
         else:

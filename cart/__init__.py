@@ -1,1 +1,5 @@
-from cart import Cart, ItemDoesNotExist
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+from cart import Cart
+from cart import ItemDoesNotExist
