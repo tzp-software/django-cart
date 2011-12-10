@@ -1,3 +1,5 @@
+# django-cart ![Project status](http://stillmaintained.com/ahmet/django-cart.png)
+
 ## Introduction
 
 django-cart is an easy to setup shopping cart mechanism for [Django](http://djangoproject.com) projects.
