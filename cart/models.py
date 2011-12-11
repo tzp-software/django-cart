@@ -5,16 +5,18 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
+from django.contrib.auth.models import User
 
 
 class Cart(models.Model):
+    owner = models.ForeignKey(User, related_name='cart')
     creation_date = models.DateTimeField(verbose_name=_('creation date'))
     checked_out = models.BooleanField(verbose_name=_('checked out'), \
                                       default=False)
 
     class Meta:
-        verbose_name = _('cart')
-        verbose_name_plural = _('carts')
+        verbose_name = _('Cart')
+        verbose_name_plural = _('Carts')
         ordering = ('-creation_date',)
 
     def __unicode__(self):
