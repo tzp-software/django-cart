@@ -56,7 +56,7 @@ class Cart:
 
     def remove(self, item):
         try:
-            item = models.Item.objects.get(pk=item.pk)
+            item = models.Item.objects.get(cart=self.cart, product=item)
         except models.Item.DoesNotExist:
             raise ItemDoesNotExist
         else:
