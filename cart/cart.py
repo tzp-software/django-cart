@@ -14,10 +14,9 @@ class ItemDoesNotExist(Exception):
 class Cart:
     def __init__(self, request):
         cart_id = request.session.get(CART_ID)
-        owner = request.user.id
         if cart_id:
             try:
-                cart = models.Cart.objects.get(id=cart_id, owner_id=owner, checked_out=False)
+                cart = models.Cart.objects.get(id=cart_id, owner=request.user, checked_out=False)
             except models.Cart.DoesNotExist:
                 cart = self.new(request)
         else:
@@ -29,7 +28,7 @@ class Cart:
             yield item
 
     def new(self, request):
-        cart = models.Cart(owner=request.user.id, creation_date=datetime.datetime.now())
+        cart = models.Cart(owner=request.user, creation_date=datetime.datetime.now())
         cart.save()
         request.session[CART_ID] = cart.id
         return cart
